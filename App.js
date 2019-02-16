@@ -14,6 +14,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Button
+          testID="openButton"
           title="open drawer"
           accessibilityLabel="open drawer"
           onPress={() => this.setState({ showDrawer: true })}

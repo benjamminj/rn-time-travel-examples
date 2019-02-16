@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window');
 
 export default class Drawer extends React.Component {
   state = {
-    animation: new Animated.Value(this.props.isOpen ? 1 : 0),
+    animation: new Animated.Value(this.props.isOpen ? width : 0),
   };
 
   componentDidUpdate(prevProps) {
@@ -14,7 +14,7 @@ export default class Drawer extends React.Component {
 
     if (!prevProps.isOpen && isOpen) {
       Animated.timing(animation, {
-        toValue: 1,
+        toValue: width,
         duration: 300,
       }).start();
     }
@@ -33,16 +33,14 @@ export default class Drawer extends React.Component {
 
     return (
       <Animated.View
+        testID="Drawer"
         style={{
           backgroundColor: '#ddd',
           height,
           width,
           transform: [
             {
-              translateX: animation.interpolate({
-                inputRange: [0, 1],
-                outputRange: [width, 0],
-              }),
+              translateX: animation,
             },
           ],
           position: 'absolute',
