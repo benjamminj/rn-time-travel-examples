@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Button, Animated } from 'react-native';
+import { Easing, Dimensions, Button, Animated } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -16,6 +16,7 @@ export default class Drawer extends React.Component {
       Animated.timing(animation, {
         toValue: width,
         duration: 300,
+        easing: Easing.in,
       }).start();
     }
 
@@ -23,6 +24,7 @@ export default class Drawer extends React.Component {
       Animated.timing(animation, {
         toValue: 0,
         duration: 300,
+        easing: Easing.out,
       }).start();
     }
   }

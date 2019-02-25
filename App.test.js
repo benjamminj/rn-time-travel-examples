@@ -2,8 +2,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import App from './App';
 
+beforeEach(() => {
+  jest.useFakeTimers();
+});
+
 describe('<App />', () => {
-  test('opens the menu', () => {
+  test('opens the menu', async () => {
     const container = renderer.create(<App />);
     const openButton = container.root.findByProps({ testID: 'openButton' });
 
@@ -11,8 +15,11 @@ describe('<App />', () => {
     const drawerTranslateXValue =
       drawer.props.style.transform[0].translateX._value;
 
+    console.log(JSON.stringify(container.toJSON(), null, 4));
+
     openButton.props.onPress();
-    expect(drawerTranslateXValue).not.toEqual(0);
-    // open the drawer
+
+    // jest.advanceTimersByTime(300);
+    expect(drawerTranslateXValue).toEqual(0);
   });
 });
